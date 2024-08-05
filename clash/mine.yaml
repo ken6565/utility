@@ -1,0 +1,65 @@
+allow-lan: false
+log-level: silent
+mode: rule
+port: 7890
+proxies:
+- alterId: 0
+  cipher: auto
+  name: "www.dongtaiwang.com \u7F8E\u56FD 0"
+  network: ws
+  port: 8080
+  server: 23.227.38.120
+  tls: false
+  type: vmess
+  uuid: 969f1909-c0d3-4c30-813d-3aec5c838b7d
+  ws-opts:
+    headers:
+      Host: dongtaiwang17.dtku47.xyz
+    path: /1IKYjV0r/
+- cipher: dummy
+  name: "www.dongtaiwang.com \u7F8E\u56FD 1"
+  obfs: plain
+  obfs-param: ''
+  password: dongtaiwang.com
+  port: 11111
+  protocol: auth_chain_a
+  server: dongtaiwang5.com
+  type: ssr
+- cipher: aes-256-gcm
+  name: "www.dongtaiwang.com \u6D1B\u6749\u77F6 2"
+  password: dongtaiwang.com
+  port: 12300
+  server: 64.31.55.51
+  type: ss
+proxy-groups:
+- interval: 300
+  name: group
+  proxies:
+  - "www.dongtaiwang.com \u7F8E\u56FD 0"
+  - "www.dongtaiwang.com \u7F8E\u56FD 1"
+  - "www.dongtaiwang.com \u6D1B\u6749\u77F6 2"
+  type: url-test
+  url: http://www.gstatic.com/generate_204
+rule-providers:
+  gfw:
+    behavior: domain
+    path: ./rule-providers/gfw.yaml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt
+  proxy:
+    behavior: domain
+    path: ./rule-providers/proxy.yaml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt
+  telegramcidr:
+    behavior: ipcidr
+    path: ./rule-providers/telegramcidr.yaml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt
+rules:
+- DOMAIN-SUFFIX, objects.githubusercontent.com, DIRECT
+- RULE-SET, proxy, group
+- RULE-SET, gfw, group
+- RULE-SET, telegramcidr, group
+- MATCH, DIRECT
+socks-port: 7891
