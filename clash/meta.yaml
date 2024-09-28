@@ -1,9 +1,3 @@
-port: 7890
-socks-port: 7891
-allow-lan: true
-mode: Rule
-log-level: info
-external-controller: :9090
 proxies:
   - {name: AE_speednode_0001, server: 94.140.0.0, port: 80, type: vless, client-fingerprint: chrome, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, servername: a.ssll.gay, network: ws, ws-opts: {path: /Twitterfreecodes, headers: {Host: a.ssll.gay}}}
   - {name: AE_speednode_0002, server: 94.140.0.0, port: 80, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, udp: true, skip-cert-verify: false, servername: a.ssll.gay, network: ws, ws-opts: {path: /Twitterfreecodes, headers: {Host: a.ssll.gay}}}
